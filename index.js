@@ -20,9 +20,16 @@ function filterByDay() {
   return todaysLogs
 }
 
-function evaluate() {
+// function evaluate() {
+//    const todaysLogs = filterByDay()
+//    return todaysLogs.reduce((acc, cur) => {
+//       cur.click()
+//       sleep(2000)
+//       acc.push(docment.getElementById('visit-synopsis').innerHTML)
 
-}
+//       return acc
+//    }, [])
+// }
 
 nightmare
   .goto('https://servicio.tech-niche.net/#/login?redirect=%2F')
@@ -31,7 +38,17 @@ nightmare
   .click('.btn-primary')
   .wait('.alert')
   .click('.btn-primary')
-  .evaluate(elavuate())
+  .evaluate(() => {
+    const todaysLogs = filterByDay()
+    return todaysLogs.reduce((acc, cur) => {
+      cur.click()
+      sleep(2000)
+      acc.push(docment.getElementById('visit-synopsis').innerHTML)
+      console.log(acc)
+
+      return acc
+    }, [])
+  })
   // .end()
   .then(result => console.log(result))
   .catch(err => console.error(err))

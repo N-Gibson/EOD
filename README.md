@@ -5,7 +5,7 @@
  Make .env file
  
     Add EMAIL=
-    Add PW = 
+    Add PW= 
     Save
     
 ```node index.js```

@@ -20,34 +20,36 @@ function filterByDay() {
   return todaysLogs
 }
 
-// function evaluate() {
-//    const todaysLogs = filterByDay()
-//    return todaysLogs.reduce((acc, cur) => {
-//       cur.click()
-//       sleep(2000)
-//       acc.push(docment.getElementById('visit-synopsis').innerHTML)
+function evaluate() {
+   const todaysLogs = filterByDay()
+   return todaysLogs.reduce((acc, cur) => {
+      cur.click()
+      sleep(2000)
+      acc.push(docment.getElementById('visit-synopsis').innerHTML)
 
-//       return acc
-//    }, [])
-// }
+      return acc
+   }, [])
+}
 
 nightmare
   .goto('https://servicio.tech-niche.net/#/login?redirect=%2F')
+  .wait('#email')
   .type('#email', process.env.EMAIL)
   .type('#password', process.env.PW)
   .click('.btn-primary')
   .wait('.alert')
   .click('.btn-primary')
   .evaluate(() => {
-    const todaysLogs = filterByDay()
-    return todaysLogs.reduce((acc, cur) => {
-      cur.click()
-      sleep(2000)
-      acc.push(docment.getElementById('visit-synopsis').innerHTML)
-      console.log(acc)
+      evaluate()
+    // const todaysLogs = filterByDay()
+    // return todaysLogs.reduce((acc, cur) => {
+    //   cur.click()
+    //   sleep(2000)
+    //   acc.push(docment.getElementById('visit-synopsis').innerHTML)
+    //   console.log(acc)
 
-      return acc
-    }, [])
+    //   return acc
+    // }, [])
   })
   // .end()
   .then(result => console.log(result))

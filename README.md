@@ -2,7 +2,7 @@
 
 ```npm install```
 
- Make .env file
+Create .env file
  
     Add EMAIL=
     Add PW= 
